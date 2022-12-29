@@ -26,23 +26,23 @@ export const newUser = async (body) => {
 
 
 // loginuser
-// export const loginuser=async (body)=>{
-//   const data= await User.findOne({email:body.email});
-//   //console.log("data ------------------>",data);
-//   //console.log("body password---------->",body);
-//   if(data){
-//     const result= await bcrypt.compare(body.password,data.password);
-//     //console.log("result------------------->",result)
-//     if(result){
-//       const token=jwt.sign({email:body.email,id:data._id},process.env.SECRET_KEY);
-//       return token;
-//     }else{
-//       throw new Error("Password is Invalid");
-//     }
-//   }else{
-//     throw new Error("Invalid  EmailId");
-//   }
-// };
+export const loginuser=async (body)=>{
+  const data= await User.findOne({email:body.email});
+  //console.log("data ------------------>",data);
+  //console.log("body password---------->",body);
+  if(data){
+    const result= await bcrypt.compare(body.password,data.password);
+    //console.log("result------------------->",result)
+    if(result){
+      const token=jwt.sign({email:body.email,id:data._id},process.env.SECRET_KEY);
+      return token;
+    }else{
+      throw new Error("Password is Invalid");
+    }
+  }else{
+    throw new Error("Invalid  EmailId");
+  }
+};
 
 // //Reset password
 // export const ResetPassword = async (body) => {
